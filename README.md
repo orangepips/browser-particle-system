@@ -8,6 +8,14 @@ Solution for "In-browser Particle System" from http://asymmetrik.com/programming
 
 Uses [Processing 3](https://processing.org/) to create various animations and [Processing JS](http://processingjs.org/) to render in browser. 
 
+## Commentary 
+
+System is designed to incorporate new processing sketches (.pde files) with a minimum amount of work. 
+
+Put a new sketch into the "sketches/{name}/{name}.pde" directory and add to the JavaScript array `sketches` in index.html. 
+
+It's conceivable to move the sketches entirely into JavaScript via [p5.js](https://p5js.org/) which would open up the opportunity for code reuse between sketches more easily. 
+
 # Problem Description
 
 We are developing a simple side scrolling in-browser game and we need a flexible engine for controlling particle systems. We need you to author a Javascript and HTML-based implementation of a basic 2d engine that can simulate different kinds of particles. Your solution must implement at least two of the following simulation types to demonstrate its extensibility:
@@ -40,4 +48,5 @@ Where processing sketch code was taken from.
  * [Leaves](http://www.openprocessing.org/sketch/163035)
  * [Rain](http://www.openprocessing.org/sketch/210804) 
  * [Snow](http://solemone.de/demos/snow-effect-processing/)
+ * [Boids (Insects)](http://cs.brynmawr.edu/gxk2013/examples/advanced/boids/) 
 

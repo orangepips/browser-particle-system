@@ -7,7 +7,6 @@
 // http://www.learningprocessing.com
 // Example 10-2: Bouncing Leaf class
  
- 
 //number of leaves in 3 layers
 int bground = 22;
 int mdground =33;
@@ -20,6 +19,10 @@ int total = bground+mdground+frground;
 int bgsize = 25;
 int mdsize = 50;
 int frsize = 80;
+
+// originaly this class was designed to track the mouse - mouseX, mouseY - the following variables used in lieu of that 
+float fakeMouseX = random(0, width);
+float fakeMouseY = random(0, height);
  
 //color array
 //Initialize Color Array, colors by https://kuler.adobe.com/Retro-Rain-color-theme-2861967/
@@ -53,22 +56,25 @@ void setup() {
       leaves[i] = new Leaf(frsize);
     }
   }
- 
+  
   /* @pjs preload="./leaf.png"; */ 
   leaf = loadImage("leaf.png"); // Public Domain leaf from http://en.wikipedia.org/wiki/Leaf#mediaviewer/File:Eenbruinigherfstblad.jpg
 }
  
 void draw() {
-  background(255, 255, 236);
- 
+  background(255, 255, 236);  
+  
+  if (int(random(0, 199)) == 0) {
+    fakeMouseX = random(0, width);
+    fakeMouseY = random(0, height);
+  }
+  
   // Move and display leaves
   for (int i = 0; i < leaves.length; i++) {
     leaves[i].move();
     leaves[i].display();
   }
-  //saveFrame(“output-####.png”);
 }
- 
  
 class Leaf {
   int size;
@@ -89,8 +95,8 @@ class Leaf {
   }
  
   void move() {
-    x += xspeed*mouseX/width; // Increment x
-    y += map(mouseY, 0, height, -5, 5);
+    x += xspeed*fakeMouseX/width; // Increment x
+    y += map(fakeMouseY, 0, height, -5, 5);    
  
     // Check edges
     if (x > width+r || x < -r) {

@@ -8,11 +8,26 @@
         <script type="text/javascript" src="SketchManager.js"></script>
         <script type="text/javascript">
         // add new sketches to this array and place in /sketches/{name}/{name}.pde
-        var sketches = ['leaves', 'rain', 'snow'];
+        var sketches = ['boids', 'leaves', 'rain', 'snow'];
         var sketchManager = new SketchManager('sketch-canvas', sketches);
         $( document ).ready(function() {
-            $( "#play-button" ).click(function() { sketchManager.play(); });
-            $( "#stop-button" ).click(function() { sketchManager.stop(); });
+            $( "#play-button" ).click(function() {
+                $('#play-button').removeClass("button-depressed");
+                $('#play-button').addClass("button-pressed");
+
+                $('#stop-button').removeClass("button-pressed");
+                $('#stop-button').addClass("button-depressed");
+                sketchManager.play();
+            });
+            $( "#stop-button" ).click(function() {
+                $('#play-button').removeClass("button-pressed");
+                $('#play-button').addClass("button-depressed");
+
+                $('#stop-button').removeClass("button-depressed");
+                $('#stop-button').addClass("button-pressed");
+                sketchManager.stop();
+
+            });
             var sketchList = $('#sketch-list');
             $.each(sketches, function(index, sketch) {
                 sketchList[0].options[sketchList[0].options.length] = new Option(sketch, sketch);
@@ -21,8 +36,19 @@
                 sketchManager.load($('#sketch-list option:selected').val());
             });
             sketchList.change();
+            $('#play-button').click();
         });
         </script>
+        <style type="text/css">
+            .button-pressed {
+                background-color: black;
+                color: white;
+            }
+            .button-depressed {
+                background-color: white;
+                color: black;
+            }
+        </style>
     </head>
     <body>
         <canvas id="sketch-canvas"></canvas>
