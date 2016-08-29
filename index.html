@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>In-browser Particle System: Snow, Rain, Leaves and Insects</title>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.8/processing.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.js"></script>
+        <script type="text/javascript" src="SketchManager.js"></script>
+        <script type="text/javascript">
+        // add new sketches to this array and place in /sketches/{name}/{name}.pde
+        var sketches = ['leaves', 'rain', 'snow'];
+        var sketchManager = new SketchManager('sketch-canvas', sketches);
+        $( document ).ready(function() {
+            $( "#play-button" ).click(function() { sketchManager.play(); });
+            $( "#stop-button" ).click(function() { sketchManager.stop(); });
+            var sketchList = $('#sketch-list');
+            $.each(sketches, function(index, sketch) {
+                sketchList[0].options[sketchList[0].options.length] = new Option(sketch, sketch);
+            });
+            $(sketchList).change(function() {
+                sketchManager.load($('#sketch-list option:selected').val());
+            });
+            sketchList.change();
+        });
+        </script>
+    </head>
+    <body>
+        <canvas id="sketch-canvas"></canvas>
+        <br/>
+        <button type="button" id="stop-button">&#9632;</button>
+        <button type="button" id="play-button">&#9654;</button>
+        <br/>
+        <label for="sketch-list">Sketches</label>: <select id="sketch-list"></select>
+    </body>
+</html>
